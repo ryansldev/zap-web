@@ -1,4 +1,7 @@
 'use client'
+import { FormButton } from "@/components/form/form-button";
+import { FormInput } from "@/components/form/form-input";
+import { SendHorizonal } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -21,7 +24,7 @@ export default function Home() {
         <span className="text-2xl">
           {getCumpriments()}
         </span>
-        <h1 className="text-4xl max-w-[691px] text-left font-bold">
+        <h1 className="text-4xl max-w-[688px] text-left font-bold">
           Fala pra gente o que está acontecendo,
           fofoca também é bem vinda
           <span className="inline-block align-middle ml-2">
@@ -31,6 +34,24 @@ export default function Home() {
             <Image src="/assets/emojis/brazil.svg" alt="Brazil flag emoji" height={36} width={36} quality={100} />
           </span>
         </h1>
+
+        <form>
+          <div className="flex items-center relative min-w-[700px]">
+            <FormInput
+              name="text"
+              type="text"
+              placeholder="O que está acontecendo?"
+              className="h-20 rounded-full text-[18px] px-8"
+            />
+
+            <FormButton
+              size="icon"
+              className="absolute right-7 rounded-lg h-12 w-12"
+            >
+              <SendHorizonal className="h-6 w-6" />
+            </FormButton>
+          </div>
+        </form>
       </div>
     </main>
   );
