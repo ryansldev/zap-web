@@ -1,17 +1,17 @@
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 
-interface FormButtonProps {
+interface FormSubmitProps {
   size?: "lg" | "sm" | "icon" | "default",
   className?: string,
   children: React.ReactNode,
 }
 
-export function FormButton({
-  size = "default",
+export function FormSubmit({
+  size,
   className,
   children,
-}: FormButtonProps) {
+}: FormSubmitProps) {
   return (
     <Button
       type="submit"

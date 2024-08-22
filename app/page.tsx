@@ -1,23 +1,9 @@
 'use client'
-import { FormButton } from "@/components/form/form-button";
-import { FormInput } from "@/components/form/form-input";
-import { SendHorizonal } from "lucide-react";
 import Image from "next/image";
+import { getCumpriments } from "@/utils/getCumpriments";
+import { CreatePostForm } from "@/components/form/create-post";
 
 export default function Home() {
-  function getCumpriments(): "Bom dia!" | "Boa tarde!" | "Boa noite!" {
-    const now = new Date()
-    const hours = now.getHours()
-
-    if (hours >= 5 && hours < 12) {
-      return "Bom dia!";
-    } else if (hours >= 12 && hours < 18) {
-      return "Boa tarde!";
-    } else {
-      return "Boa noite!";
-    }
-  }
-
   return (
     <main>
       <div className="flex flex-col p-2 text-center items-center pt-14">
@@ -35,23 +21,7 @@ export default function Home() {
           </span>
         </h1>
 
-        <form>
-          <div className="flex items-center relative min-w-[700px]">
-            <FormInput
-              name="text"
-              type="text"
-              placeholder="O que está acontecendo?"
-              className="h-20 rounded-full text-[18px] px-8"
-            />
-
-            <FormButton
-              size="icon"
-              className="absolute right-7 rounded-lg h-12 w-12"
-            >
-              <SendHorizonal className="h-6 w-6" />
-            </FormButton>
-          </div>
-        </form>
+        <CreatePostForm />
       </div>
     </main>
   );
