@@ -1,8 +1,11 @@
+'use client'
+
 import { ArrowLeft } from "lucide-react";
 import { Button } from "./ui/button";
 import { Emoji } from "./emoji";
 import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
+import { useRouter } from "next/navigation";
 
 interface PageHeaderProps {
   title: string;
@@ -21,6 +24,8 @@ export function PageHeader({
   centered,
   size = "md",
 }: PageHeaderProps) {
+  const router = useRouter()
+
   return (
     <div className={cn(
       "flex gap-4 w-full relative mb-2",
@@ -37,7 +42,7 @@ export function PageHeader({
           position === "inline" ? "ghost" : "secondary"
         )}
         size="icon"
-        onClick={onBack}
+        onClick={onBack ?? router.back}
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>

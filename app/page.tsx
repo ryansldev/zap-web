@@ -25,7 +25,7 @@ export default function Home() {
           />
         </h1>
 
-        <CreatePostForm />
+        <CreatePostForm redirect />
       </div>
     </main>
   );

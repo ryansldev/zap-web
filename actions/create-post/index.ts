@@ -3,6 +3,7 @@ import { InputType, ReturnType } from "./types";
 import { AxiosError } from "axios";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { CreatePostBodySchema } from "./schema";
+import { revalidatePath } from "next/cache";
 
 async function handler({ text }: InputType): Promise<ReturnType> {
   try {
@@ -10,6 +11,7 @@ async function handler({ text }: InputType): Promise<ReturnType> {
       text,
     })
     
+    revalidatePath('/timeline')
     return { data }
   } catch(e: unknown) {
     const error = e as AxiosError<{ message: string }>
