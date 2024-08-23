@@ -1,5 +1,7 @@
+'use client'
+
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 import { useAction } from "@/hooks/use-action";
 import { createPost } from "@/actions/create-post";
@@ -9,20 +11,28 @@ import { FormInput } from "@/components/form/form-input";
 
 import { SendHorizonal } from "lucide-react";
 
-export function CreatePostForm() {
+interface CreatePostFormProps {
+  redirect?: boolean;
+}
+
+export function CreatePostForm({
+  redirect
+}: CreatePostFormProps) {
   const router = useRouter()
 
   const { execute, fieldErrors } = useAction(createPost, {
-    onSuccess: () => {},
+    onSuccess: (data) => {
+      toast.success('Publicação criada!')
+      { redirect && router.push('/timeline') }
+    },
     onError: (error) => {
       toast.error(error)
-      if(error === 'Authentication required') { router.push('/login') }
-    },
+    }
   })
 
-  function onSubmit(formData: FormData) {
+  async function onSubmit(formData: FormData) {
     const text = formData.get('text') as string
-    execute({ text })
+    await execute({ text })
   }
   
   return (

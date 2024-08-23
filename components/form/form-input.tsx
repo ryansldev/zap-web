@@ -18,7 +18,7 @@ export function FormInput(props: FormInputProps) {
         { props.label ? (
           <Label
             htmlFor={props.name}
-            className="text-xs font-semibold text-neutral-700"
+            className="text-xs font-semibold"
           >
             {props.label}
           </Label>

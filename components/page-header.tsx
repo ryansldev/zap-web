@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "./ui/button";
 import { Emoji } from "./emoji";
 import { cn } from "@/lib/utils";
+import { Separator } from "./ui/separator";
 
 interface PageHeaderProps {
   title: string;
@@ -22,7 +23,7 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div className={cn(
-      "flex gap-4",
+      "flex gap-4 w-full relative mb-2",
       (position === "top" || position === "transparent-top") && "absolute w-full gap-8 top-0 left-0",
       position === "transparent-top" && "bg-transparent",
       position === "top" && "bg-[#0f0f0f]",
@@ -40,7 +41,7 @@ export function PageHeader({
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>
-      <div className="flex flex-col space-y-2 w-full">
+      <div className="flex flex-col w-full">
         <h1 className="text-2xl font-bold">
           { title }
           <Emoji
@@ -53,6 +54,11 @@ export function PageHeader({
         </h1>
         <span className="opacity-70 font-regular">{description}</span>
       </div>
+      { position === "inline" && (
+        <Separator
+          className="absolute bottom-2 left-0"
+        />
+      )}
     </div>
   )
 }

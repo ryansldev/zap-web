@@ -1,4 +1,5 @@
 'use client'
+
 import { getCumpriments } from "@/utils/getCumpriments";
 import { CreatePostForm } from "@/components/form/create-post";
 import { Emoji } from "@/components/emoji";

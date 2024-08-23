@@ -1,7 +1,6 @@
 import { api } from "@/lib/api";
 import { InputType, ReturnType } from "./types";
 import { AxiosError } from "axios";
-import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { CreatePostBodySchema } from "./schema";
 
@@ -10,9 +9,8 @@ async function handler({ text }: InputType): Promise<ReturnType> {
     const { data } = await api.post('/posts', {
       text,
     })
-
-    revalidatePath('/posts')
-    return data
+    
+    return { data }
   } catch(e: unknown) {
     const error = e as AxiosError<{ message: string }>
     return {
