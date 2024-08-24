@@ -27,7 +27,7 @@ export function FormInput(props: FormInputProps) {
           type={props.type}
           name={props.id || props.name}
           placeholder={props.placeholder}
-          className={cn(props.className)}
+          className={cn('shadow-md', props.className)}
           disabled={pending || props.disabled}
           required={props.required}
         />

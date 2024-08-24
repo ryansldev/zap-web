@@ -1,9 +1,17 @@
-'use client'
-
+import { api } from "@/lib/api";
 import { PageHeader } from "@/components/page-header";
 import { Post } from "@/components/post";
+import { Post as PostType } from "@/models/Post";
+import { CreatePostForm } from "@/components/form/create-post";
+import { cookies } from "next/headers";
 
-export default function Timeline() {  
+export default async function Timeline() {
+  const { data: posts } = await api.get<PostType[]>('/posts', {
+    headers: {
+      cookie: `access_token=${cookies().get('access_token')?.value}`
+    }
+  })
+
   return (
     <div>
       <PageHeader
@@ -11,13 +19,22 @@ export default function Timeline() {
         centered
       />
 
-      <div className="flex items-center justify-center flex-wrap">
-        <Post
-          username="johndoe"
-          text="Minha vizinha é doida de pedra!! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend, dolor elementum ullamcorper semper, ex nibh."
-          likes={12}
-          comments={4}
-        />
+      <div className="flex flex-col items-center justify-center space-y-4">
+        {posts && posts.map((post) => (
+          <Post
+            key={post.id}
+            username={post.authorId}
+            text={post.text}
+            likes={post.likedBy ? post.likedBy.length : 0}
+            comments={0}
+          />
+        ))}
+
+        <div className="fixed bottom-0 pb-8 bg-gradient-to-t from-black w-full">
+          <div className="max-w-[700px] mx-auto">
+            <CreatePostForm />
+          </div>
+        </div>
       </div>
     </div>
   )
