@@ -16,7 +16,10 @@ export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: Pos
   if(!post) return <div></div>
   
   return (
-    <Link href={`/posts/${post.id}`} className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4">
+    <Link
+      href={`/posts/${post.id}`}
+      className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4"
+    >
       <Button
         size="icon"
         variant="secondary"

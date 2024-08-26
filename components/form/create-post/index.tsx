@@ -27,6 +27,7 @@ export function CreatePostForm({
     },
     onError: (error) => {
       toast.error(error)
+      if(error === "Authentication required") router.push('/login')
     }
   })
 
