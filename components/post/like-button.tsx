@@ -32,7 +32,9 @@ export function LikeButton({
     }
   })
 
-  async function onClick() {
+  async function onClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault()
+    e.stopPropagation()
     alreadyHasLikedPost ? await executeDislikePost({ id }) : await executeLikePost({ id })
   }
 
