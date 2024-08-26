@@ -1,19 +1,16 @@
-import { HeartIcon, MessageCircle, UserIcon } from "lucide-react";
+'use client'
+
+import { MessageCircle, UserIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import { LikeButton } from "./like-button";
+import { Post as PostType } from "@/models/Post";
 
 interface PostProps {
-  username: string;
-  text: string;
-  likes: number;
-  comments: number;
-  profilePic?: string;
+  post: PostType;
+  alreadyHasLikedPost: boolean;
 }
 
-export function Post({
-  text,
-  likes,
-  comments,
-}: PostProps) {
+export function Post({ post, alreadyHasLikedPost }: PostProps) {
   return (
     <div className="flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4">
       <Button
@@ -26,25 +23,21 @@ export function Post({
 
       <div className="flex-1 mt-1">
         <span className="text-secondary-foreground">
-          {text}
+          {post.text}
         </span>
 
         <div className="flex flex-wrap space-x-2 mt-2">
-          <Button
-            variant="secondary"
-            className="flex space-x-2"
-            size="sm"
-          >
-            <HeartIcon className="h-5 w-5" />
-            <span>{likes}</span>
-          </Button>
+          <LikeButton
+            id={post.id}
+            likedBy={post.likedBy ?? []}
+            alreadyHasLikedPost={alreadyHasLikedPost}
+          />
           <Button
             variant="secondary"
             className="flex space-x-2"
             size="sm"
           >
             <MessageCircle className="h-5 w-5" />
-            <span>{comments}</span>
           </Button>
         </div>
       </div>

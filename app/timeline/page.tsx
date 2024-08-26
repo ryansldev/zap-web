@@ -6,6 +6,7 @@ import { CreatePostForm } from "@/components/form/create-post";
 import { cookies } from "next/headers";
 
 export default async function Timeline() {
+  const username = cookies().get('username')?.value
   const { data: posts } = await api.get<PostType[]>('/posts', {
     headers: {
       cookie: `access_token=${cookies().get('access_token')?.value}`
@@ -23,10 +24,8 @@ export default async function Timeline() {
         {posts && posts.map((post) => (
           <Post
             key={post.id}
-            username={post.authorId}
-            text={post.text}
-            likes={post.likedBy ? post.likedBy.length : 0}
-            comments={0}
+            post={post}
+            alreadyHasLikedPost={!!(post.likedBy && post.likedBy.find((user) => user.username === username))}
           />
         ))}
 

@@ -24,6 +24,8 @@ async function handler({
       maxAge: 60*60*24,
     })
 
+    cookies().set('username', username)
+
     return { data }
   } catch(e: unknown) {
     const error = e as AxiosError<{ message: string }>
