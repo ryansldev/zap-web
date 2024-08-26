@@ -3,6 +3,8 @@
 import { getCumpriments } from "@/utils/getCumpriments";
 import { CreatePostForm } from "@/components/form/create-post";
 import { Emoji } from "@/components/emoji";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,6 +28,14 @@ export default function Home() {
         </h1>
 
         <CreatePostForm redirect />
+        <Link href="/timeline">
+          <Button
+            variant="link"
+            className="text-[#777] hover:text-secondary-foreground underline"
+          >
+            Ou apenas saiba da fofoca
+          </Button>
+        </Link>
       </div>
     </main>
   );

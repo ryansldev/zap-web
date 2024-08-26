@@ -10,11 +10,12 @@ import { cookies } from "next/headers";
 
 async function handler({ text }: InputType): Promise<ReturnType> {
   try {
+    const token = cookies().get('access_token')?.value
     const { data } = await api.post('/posts', {
       text,
     }, {
       headers: {
-        cookie: `access_token=${cookies().get('access_token')?.value}`
+        cookie: token && `access_token=${token}`
       }
     })
     

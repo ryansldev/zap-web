@@ -21,7 +21,7 @@ export function CreatePostForm({
   const router = useRouter()
 
   const { execute, fieldErrors } = useAction(createPost, {
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success('Publicação criada!')
       { redirect && router.push('/timeline') }
     },
