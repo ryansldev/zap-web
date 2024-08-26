@@ -13,12 +13,9 @@ interface PostProps {
 }
 
 export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: PostProps) {
-  if(!post) return <div></div>
-  
   return (
-    <Link
-      href={`/posts/${post.id}`}
-      className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4"
+    <div
+      className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4 rounded-lg"
     >
       <Button
         size="icon"
@@ -34,10 +31,6 @@ export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: Pos
             size="icon"
             variant="ghost"
             className="rounded-full absolute top-0 right-0 text-secondary-foreground"
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-            }}
           >
             <Ellipsis className="w-4 h-4" />
           </Button>
@@ -52,19 +45,17 @@ export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: Pos
             likedBy={post.likedBy ?? []}
             alreadyHasLikedPost={alreadyHasLikedPost}
           />
-          <Button
-            variant="secondary"
-            className="flex space-x-2 "
-            size="sm"
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-            }}
-          >
-            <MessageCircle className="h-5 w-5" />
-          </Button>
+          <Link href={`/timeline/${post.id}`}>
+            <Button
+              variant="secondary"
+              className="flex space-x-2 "
+              size="sm"
+            >
+              <MessageCircle className="h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }

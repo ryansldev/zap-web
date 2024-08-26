@@ -8,11 +8,12 @@ import { CreatePostBodySchema } from "./schema";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-async function handler({ text }: InputType): Promise<ReturnType> {
+async function handler({ text, parentId }: InputType): Promise<ReturnType> {
   try {
     const token = cookies().get('access_token')?.value
     const { data } = await api.post('/posts', {
       text,
+      parentId,
     }, {
       headers: {
         cookie: token && `access_token=${token}`

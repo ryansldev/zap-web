@@ -57,7 +57,7 @@ export function PageHeader({
             className="ml-2"
           />
         </h1>
-        <span className="opacity-70 font-regular">{description}</span>
+        <span className="opacity-70 font-regular max-w-[250px] mx-auto truncate">{description}</span>
       </div>
       { position === "inline" && (
         <Separator

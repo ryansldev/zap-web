@@ -12,11 +12,13 @@ import { FormInput } from "@/components/form/form-input";
 import { SendHorizonal } from "lucide-react";
 
 interface CreatePostFormProps {
+  parentId?: string;
   redirect?: boolean;
 }
 
 export function CreatePostForm({
-  redirect
+  redirect,
+  parentId,
 }: CreatePostFormProps) {
   const router = useRouter()
 
@@ -33,7 +35,7 @@ export function CreatePostForm({
 
   async function onSubmit(formData: FormData) {
     const text = formData.get('text') as string
-    await execute({ text })
+    await execute({ text, parentId })
   }
   
   return (
