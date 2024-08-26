@@ -19,18 +19,6 @@ export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: Pos
     <Link href={`/posts/${post.id}`} className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4">
       <Button
         size="icon"
-        variant="ghost"
-        className="rounded-full absolute top-0 right-0 text-secondary-foreground"
-        onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-        }}
-      >
-        <Ellipsis className="w-4 h-4" />
-      </Button>
-      
-      <Button
-        size="icon"
         variant="secondary"
         className="w-16 h-16 rounded-full"
       >
@@ -38,6 +26,19 @@ export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: Pos
       </Button>
 
       <div className="flex-1 mt-1">
+        { isOwner &&
+          <Button
+            size="icon"
+            variant="ghost"
+            className="rounded-full absolute top-0 right-0 text-secondary-foreground"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+            }}
+          >
+            <Ellipsis className="w-4 h-4" />
+          </Button>
+        }
         <span className="text-secondary-foreground">
           {post.text}
         </span>
