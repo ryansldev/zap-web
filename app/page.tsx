@@ -9,7 +9,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main>
-      <div className="flex flex-col p-2 text-center items-center pt-14">
+      <div className="flex flex-col p-2 text-center items-center min-h-screen justify-center">
         <span className="text-2xl">
           {getCumpriments()}
         </span>
