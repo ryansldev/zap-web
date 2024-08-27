@@ -17,6 +17,7 @@ export default async function PostDetails({
 }: PostDetailsProps) {
   const username = cookies().get('username')?.value
   const access_token = cookies().get('access_token')?.value
+  const userIsAuthenticated = !!username && !!access_token
   
   const { data: post } = await api.get<PostType>(`/posts/${params.postId}`, {
     headers: {
@@ -45,6 +46,7 @@ export default async function PostDetails({
             alreadyHasLikedPost={!!(post.likedBy?.find((user) => user.username === username))}
             isOwner={post.author.username === username}
             comments={comments.length}
+            userIsAuthenticated={userIsAuthenticated}
           />
 
           <div className="pl-8 w-full">
@@ -60,6 +62,7 @@ export default async function PostDetails({
                   post={comment}
                   alreadyHasLikedPost={!!(comment.likedBy && comment.likedBy.find((user) => user.username === username))}
                   isOwner={comment.author.username === username}
+                  userIsAuthenticated={userIsAuthenticated}
                 />
               ))}
             </div>

@@ -8,6 +8,8 @@ import { cookies } from "next/headers";
 export default async function Timeline() {
   const username = cookies().get('username')?.value
   const access_token = cookies().get('access_token')?.value
+  const userIsAuthenticated = !!username && !!access_token
+  
   const { data: posts } = await api.get<PostType[]>('/posts', {
     headers: {
       cookie: `access_token=${access_token}`
@@ -28,6 +30,7 @@ export default async function Timeline() {
             post={post}
             alreadyHasLikedPost={!!(post.likedBy && post.likedBy.find((user) => user.username === username))}
             isOwner={post.author.username === username}
+            userIsAuthenticated={userIsAuthenticated}
           />
         ))}
 

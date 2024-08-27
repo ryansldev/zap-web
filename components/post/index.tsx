@@ -5,29 +5,16 @@ import { Button } from "../ui/button";
 import { LikeButton } from "./like-button";
 import { Post as PostType } from "@/models/Post";
 import { CommentButton } from "./comment-button";
-import { useAction } from "@/hooks/use-action";
-import { getIsAuthenticated } from "@/actions/get-is-authenticated";
-import { toast } from "sonner";
-import { useEffect } from "react";
 
 interface PostProps {
   post: PostType;
   isOwner?: boolean;
   alreadyHasLikedPost?: boolean;
   comments?: number;
+  userIsAuthenticated?: boolean;
 }
 
-export function Post({ post, isOwner = false, alreadyHasLikedPost = false, comments }: PostProps) {
-  const { execute: executeGetIsAuthenticated, data: userIsAuthenticated } = useAction(getIsAuthenticated, {
-    onError: (error) => {
-      toast.error(error)
-    }
-  })
-
-  useEffect(() => {
-    executeGetIsAuthenticated({})
-  }, [])
-  
+export function Post({ post, isOwner = false, alreadyHasLikedPost = false, userIsAuthenticated = false, comments }: PostProps) {  
   return (
     <div
       className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4 rounded-lg"
