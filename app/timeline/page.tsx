@@ -7,9 +7,10 @@ import { cookies } from "next/headers";
 
 export default async function Timeline() {
   const username = cookies().get('username')?.value
+  const access_token = cookies().get('access_token')?.value
   const { data: posts } = await api.get<PostType[]>('/posts', {
     headers: {
-      cookie: `access_token=${cookies().get('access_token')?.value}`
+      cookie: `access_token=${access_token}`
     }
   })
 
@@ -30,9 +31,9 @@ export default async function Timeline() {
           />
         ))}
 
-        <div className="fixed bottom-0 pb-8 bg-gradient-to-t from-black w-full">
+        <div className="fixed bottom-0 pb-8 bg-gradient-to-t via-black from-black w-full">
           <div className="max-w-[700px] mx-auto">
-            <CreatePostForm />
+            <CreatePostForm disabled={!access_token || !username} />
           </div>
         </div>
       </div>
