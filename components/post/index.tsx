@@ -1,11 +1,14 @@
 'use client'
 
-import Link from "next/link";
-import { Ellipsis, MessageCircle, UserIcon } from "lucide-react";
+import { Ellipsis, UserIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { LikeButton } from "./like-button";
 import { Post as PostType } from "@/models/Post";
 import { CommentButton } from "./comment-button";
+import { useAction } from "@/hooks/use-action";
+import { getIsAuthenticated } from "@/actions/get-is-authenticated";
+import { toast } from "sonner";
+import { useEffect } from "react";
 
 interface PostProps {
   post: PostType;
@@ -15,6 +18,16 @@ interface PostProps {
 }
 
 export function Post({ post, isOwner = false, alreadyHasLikedPost = false, comments }: PostProps) {
+  const { execute: executeGetIsAuthenticated, data: userIsAuthenticated } = useAction(getIsAuthenticated, {
+    onError: (error) => {
+      toast.error(error)
+    }
+  })
+
+  useEffect(() => {
+    executeGetIsAuthenticated({})
+  }, [])
+  
   return (
     <div
       className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4 rounded-lg"
@@ -46,6 +59,7 @@ export function Post({ post, isOwner = false, alreadyHasLikedPost = false, comme
             id={post.id}
             likedBy={post.likedBy ?? []}
             alreadyHasLikedPost={alreadyHasLikedPost}
+            disabled={!userIsAuthenticated}
           />
           <CommentButton
             postId={post.id}

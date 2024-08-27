@@ -48,7 +48,10 @@ export default async function PostDetails({
           />
 
           <div className="pl-8 w-full">
-            <CreatePostForm parentId={params.postId} />
+            <CreatePostForm
+              parentId={params.postId}
+              disabled={!access_token || !username}
+            />
 
             <div className="flex flex-col items-center justify-center space-y-4 mt-8">
               {comments.map((comment) => (

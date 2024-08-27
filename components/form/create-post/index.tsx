@@ -46,7 +46,7 @@ export function CreatePostForm({
         <FormInput
           name="text"
           type="text"
-          placeholder={disabled ? "Faça login para criar um post" : "O que está acontecendo?"}
+          placeholder={disabled ? "Faça login para criar uma nova publicação" : "O que está acontecendo?"}
           className="h-20 rounded-full text-[18px] px-8"
           errors={fieldErrors}
           disabled={disabled}
