@@ -44,6 +44,7 @@ export default async function PostDetails({
             post={post}
             alreadyHasLikedPost={!!(post.likedBy?.find((user) => user.username === username))}
             isOwner={post.author.username === username}
+            comments={comments.length}
           />
 
           <div className="pl-8 w-full">

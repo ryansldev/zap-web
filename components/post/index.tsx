@@ -5,14 +5,16 @@ import { Ellipsis, MessageCircle, UserIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { LikeButton } from "./like-button";
 import { Post as PostType } from "@/models/Post";
+import { CommentButton } from "./comment-button";
 
 interface PostProps {
   post: PostType;
   isOwner?: boolean;
   alreadyHasLikedPost?: boolean;
+  comments?: number;
 }
 
-export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: PostProps) {
+export function Post({ post, isOwner = false, alreadyHasLikedPost = false, comments }: PostProps) {
   return (
     <div
       className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4 rounded-lg"
@@ -45,15 +47,10 @@ export function Post({ post, isOwner = false, alreadyHasLikedPost = false }: Pos
             likedBy={post.likedBy ?? []}
             alreadyHasLikedPost={alreadyHasLikedPost}
           />
-          <Link href={`/timeline/${post.id}`}>
-            <Button
-              variant="secondary"
-              className="flex space-x-2 "
-              size="sm"
-            >
-              <MessageCircle className="h-5 w-5" />
-            </Button>
-          </Link>
+          <CommentButton
+            postId={post.id}
+            comments={comments}
+          />
         </div>
       </div>
     </div>
