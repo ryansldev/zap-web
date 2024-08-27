@@ -26,7 +26,7 @@ export default async function Timeline() {
             key={post.id}
             post={post}
             alreadyHasLikedPost={!!(post.likedBy && post.likedBy.find((user) => user.username === username))}
-            isOwner={true}
+            isOwner={post.author.username === username}
           />
         ))}
 
