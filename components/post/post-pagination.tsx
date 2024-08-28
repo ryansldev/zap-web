@@ -44,9 +44,6 @@ export function PostPagination({
         <PaginationItem>
           <PaginationLink href={`?page=${page+1}`}>{page+1}</PaginationLink>
         </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href={`?page=${page+2}`} />
-        </PaginationItem>
       </PaginationContent>
     </Pagination>
   )

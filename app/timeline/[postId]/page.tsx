@@ -20,7 +20,7 @@ export default async function PostDetails({
   params,
   searchParams,
 }: PostDetailsProps) {
-  const { page } = searchParams
+  const page = Number(searchParams.page ?? 1)
 
   const username = cookies().get('username')?.value
   const access_token = cookies().get('access_token')?.value
