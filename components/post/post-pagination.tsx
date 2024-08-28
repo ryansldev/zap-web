@@ -5,18 +5,27 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, Pagi
 interface PostPaginationProps {
   page: number;
   notFound?: boolean;
+  type?: "POST" | "COMMENT";
 }
 
-export function PostPagination({ page, notFound = false }: PostPaginationProps) {
+export function PostPagination({
+  page,
+  notFound = false,
+  type = "POST"
+}: PostPaginationProps) {
   if(notFound) {
     return (
       <>
-        <span className="text-secondary-foreground">Nenhum conteúdo encontrado!</span>
-        <Link href={`/timeline?page=${page-1}`}>
-          <Button>
-            Voltar para a página anterior
-          </Button>
-        </Link>
+        <span className="text-secondary-foreground">
+          Nenhum {type === "POST" ? "conteúdo" : "comentário"} encontrado!
+        </span>
+        { page > 1 && (
+          <Link href={`/timeline?page=${page-1}`}>
+            <Button>
+              Voltar para a página anterior
+            </Button>
+          </Link>
+        )}
       </>
     )
   }

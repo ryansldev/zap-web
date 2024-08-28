@@ -1,6 +1,7 @@
 import { CreatePostForm } from "@/components/form/create-post";
 import { PageHeader } from "@/components/page-header";
 import { Post } from "@/components/post";
+import { PostPagination } from "@/components/post/post-pagination";
 import { api } from "@/lib/api";
 import { Post as PostType } from "@/models/Post";
 import { AxiosError } from "axios";
@@ -10,11 +11,17 @@ interface PostDetailsProps {
   params: {
     postId: string;
   }
+  searchParams: {
+    page?: number;
+  }
 }
 
 export default async function PostDetails({
   params,
+  searchParams,
 }: PostDetailsProps) {
+  const { page } = searchParams
+
   const username = cookies().get('username')?.value
   const access_token = cookies().get('access_token')?.value
   const userIsAuthenticated = !!username && !!access_token
@@ -56,7 +63,7 @@ export default async function PostDetails({
             />
 
             <div className="flex flex-col items-center justify-center space-y-4 mt-8">
-              {comments.map((comment) => (
+              {comments && comments.map((comment) => (
                 <Post
                   key={comment.id}
                   post={comment}
@@ -65,6 +72,8 @@ export default async function PostDetails({
                   userIsAuthenticated={userIsAuthenticated}
                 />
               ))}
+
+              <PostPagination page={Number(page) ?? 1} notFound={comments.length === 0} type="COMMENT" />
             </div>
           </div>
         </div>
