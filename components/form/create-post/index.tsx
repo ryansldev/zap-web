@@ -10,6 +10,7 @@ import { FormSubmit } from "@/components/form/form-submit";
 import { FormInput } from "@/components/form/form-input";
 
 import { SendHorizonal } from "lucide-react";
+import { useRef } from "react";
 
 interface CreatePostFormProps {
   disabled?: boolean;
@@ -23,6 +24,7 @@ export function CreatePostForm({
   disabled = false,
 }: CreatePostFormProps) {
   const router = useRouter()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const { execute, fieldErrors } = useAction(createPost, {
     onSuccess: () => {
@@ -38,12 +40,16 @@ export function CreatePostForm({
   async function onSubmit(formData: FormData) {
     const text = formData.get('text') as string
     await execute({ text, parentId })
+    if(inputRef.current) {
+      inputRef.current.value = ''
+    }
   }
   
   return (
     <form action={onSubmit}>
       <div className="flex items-center relative min-w-[700px] mt-6">
         <FormInput
+          ref={inputRef}
           name="text"
           type="text"
           placeholder={disabled ? "Faça login para criar uma nova publicação" : "O que está acontecendo?"}

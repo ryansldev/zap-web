@@ -24,7 +24,11 @@ async function handler({
       maxAge: 60*60*24,
     })
 
-    cookies().set('username', username)
+    cookies().set('username', username, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 60*60*24,
+    })
 
     return { data }
   } catch(e: unknown) {

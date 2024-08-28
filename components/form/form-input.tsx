@@ -3,13 +3,14 @@ import { Input, InputProps } from "../ui/input";
 import { Label } from "../ui/label";
 import { useFormStatus } from "react-dom";
 import { FormErrors } from "./form-errors";
+import { forwardRef } from "react";
 
 type FormInputProps = InputProps & {
   errors?: Record<string, string[] | undefined>
   label?: string;
 }
 
-export function FormInput(props: FormInputProps) {
+export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, ref) => {
   const { pending } = useFormStatus();
 
   return (
@@ -24,6 +25,7 @@ export function FormInput(props: FormInputProps) {
           </Label>
         ) : null}
         <Input
+          ref={ref}
           type={props.type}
           name={props.id || props.name}
           placeholder={props.placeholder}
@@ -38,4 +40,6 @@ export function FormInput(props: FormInputProps) {
       />
     </div>
   )
-}
+})
+
+FormInput.displayName = "FormInput"

@@ -43,6 +43,7 @@ export function PageHeader({
         )}
         size="icon"
         onClick={onBack ?? router.back}
+        className="absolute"
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>
