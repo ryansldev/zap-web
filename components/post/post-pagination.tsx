@@ -1,6 +1,8 @@
-import Link from "next/link";
+'use client'
+
 import { Button } from "../ui/button";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "../ui/pagination";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious } from "../ui/pagination";
+import { useRouter } from "next/navigation";
 
 interface PostPaginationProps {
   page: number;
@@ -13,6 +15,8 @@ export function PostPagination({
   notFound = false,
   type = "POST"
 }: PostPaginationProps) {
+  const router = useRouter()
+
   if(notFound) {
     return (
       <>
@@ -20,11 +24,9 @@ export function PostPagination({
           Nenhum {type === "POST" ? "conteúdo" : "comentário"} encontrado!
         </span>
         { page > 1 && (
-          <Link href={`/timeline?page=${page-1}`}>
-            <Button>
-              Voltar para a página anterior
-            </Button>
-          </Link>
+          <Button onClick={() => router.back()}>
+            Voltar para a página anterior
+          </Button>
         )}
       </>
     )

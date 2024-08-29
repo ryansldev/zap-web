@@ -4,7 +4,6 @@ import { Post } from "@/components/post";
 import { PostPagination } from "@/components/post/post-pagination";
 import { api } from "@/lib/api";
 import { Post as PostType } from "@/models/Post";
-import { AxiosError } from "axios";
 import { cookies } from "next/headers";
 
 interface PostDetailsProps {
@@ -35,6 +34,10 @@ export default async function PostDetails({
   const { data: comments } = await api.get<PostType[]>(`/posts/${params.postId}/comments`, {
     headers: {
       cookie: `access_token=${access_token}`
+    },
+    params: {
+      limit: userIsAuthenticated ? 25 : 5,
+      page: userIsAuthenticated ? page : 1,
     }
   })
 
@@ -43,7 +46,7 @@ export default async function PostDetails({
       <div className="w-full max-w-[800px] mx-auto">
         <PageHeader
           title={`@${post.author.username}${comments.length > 1 ? ` +${comments.length} outros` : ''}`}
-          description={`${post.text}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`}
+          description={post.text}
           centered
         />
 

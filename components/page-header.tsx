@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 interface PageHeaderProps {
   title: string;
   description?: React.ReactNode;
-  onBack?: () => void;
+  redirectTo?: string;
   position?: "top" | "transparent-top" | "inline";
   centered?: boolean;
   size?: "sm" | "md" | "lg";
@@ -19,12 +19,17 @@ interface PageHeaderProps {
 export function PageHeader({
   title,
   description,
-  onBack,
+  redirectTo,
   position = "inline",
   centered,
   size = "md",
 }: PageHeaderProps) {
   const router = useRouter()
+
+  function onBack() {
+    if(!redirectTo) return router.back()
+    router.push(redirectTo)
+  }
 
   return (
     <div className={cn(
@@ -42,7 +47,7 @@ export function PageHeader({
           position === "inline" ? "ghost" : "secondary"
         )}
         size="icon"
-        onClick={onBack ?? router.back}
+        onClick={onBack}
         className="absolute"
       >
         <ArrowLeft className="h-6 w-6" />
