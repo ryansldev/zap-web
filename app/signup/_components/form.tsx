@@ -37,9 +37,9 @@ export function SignupForm() {
   }
 
   return (
-    <form action={onSubmit} className="w-full">
+    <form action={onSubmit} className="w-full px-4">
       <div className="flex flex-col space-y-4">
-        <div className="flex flex-wrap gap-2">
+        <div className="sm:flex gap-2">
           <FormInput
             name="name"
             type="text"
