@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Zap – toda fofoca é bem vinda",
-  description: "Conecte-se por meio da meio fofoca e notícia.",
+  description: "Conecte-se por meio da fofoca e notícia.",
 };
 
 export default function RootLayout({
