@@ -59,7 +59,7 @@ export default async function PostDetails({
             userIsAuthenticated={userIsAuthenticated}
           />
 
-          <div className="pl-8 w-full">
+          <div className="sm:pl-8 w-full">
             <CreatePostForm
               parentId={params.postId}
               disabled={!access_token || !username}
