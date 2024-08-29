@@ -38,7 +38,7 @@ export default async function Timeline({ searchParams }: TimelineProps) {
         centered
       />
 
-      <div className="flex flex-col items-center justify-center space-y-4 pb-[150px]">
+      <div className="flex flex-col items-center justify-center space-y-4 pb-[150px] px-4">
         {posts && posts.map((post) => (
           <Post
             key={post.id}
@@ -60,7 +60,7 @@ export default async function Timeline({ searchParams }: TimelineProps) {
         )}
       </div>
       <div className="fixed bottom-0 pb-8 bg-gradient-to-t via-black from-black w-full">
-        <div className="max-w-[700px] mx-auto">
+        <div className="max-w-[700px] mx-auto px-4">
           <CreatePostForm disabled={!access_token || !username} />
         </div>
       </div>
