@@ -1,12 +1,10 @@
 'use client'
 
-import { Ellipsis, UserIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import { LikeButton } from "./like-button";
 import { Post as PostType } from "@/models/Post";
 import { CommentButton } from "./comment-button";
-import Link from "next/link";
 import { UserAvatar } from "../user-avatar";
+import { DropdownActions } from "./dropdown-actions";
 
 interface PostProps {
   post: PostType;
@@ -33,13 +31,9 @@ export function Post({
 
       <div className="flex-1 mt-1">
         { isOwner &&
-          <Button
-            size="icon"
-            variant="ghost"
-            className="rounded-full absolute top-0 right-0 text-secondary-foreground"
-          >
-            <Ellipsis className="w-4 h-4" />
-          </Button>
+          <div className="absolute top-0 right-0">
+            <DropdownActions postId={post.id} />
+          </div>
         }
         <span className="text-secondary-foreground">
           {post.text}
