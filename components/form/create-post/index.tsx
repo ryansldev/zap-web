@@ -46,14 +46,14 @@ export function CreatePostForm({
   }
   
   return (
-    <form action={onSubmit}>
-      <div className="flex items-center relative min-w-[700px] mt-6">
+    <form action={onSubmit} className="w-full">
+      <div className="flex items-center relative w-full max-w-[700px] mt-6 mx-auto">
         <FormInput
           ref={inputRef}
           name="text"
           type="text"
           placeholder={disabled ? "Faça login para criar uma nova publicação" : "O que está acontecendo?"}
-          className="h-20 rounded-full text-[18px] px-8"
+          className="h-20 rounded-full sm:text-[18px] text-1xl sm:px-8 px-5 sm:pr-0 pr-[85px]"
           errors={fieldErrors}
           disabled={disabled}
           required
@@ -62,7 +62,7 @@ export function CreatePostForm({
         <FormSubmit
           size="icon"
           disabled={disabled}
-          className="absolute right-7 rounded-lg h-12 w-12 top-4"
+          className="absolute sm:right-7 right-6 rounded-lg h-12 w-12 top-4"
         >
           <SendHorizonal className="h-6 w-6" />
         </FormSubmit>

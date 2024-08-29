@@ -13,7 +13,7 @@ export default function Home() {
         <span className="text-2xl">
           {getCumpriments()}
         </span>
-        <h1 className="text-4xl max-w-[688px] text-left font-bold">
+        <h1 className="sm:text-4xl text-3xl w-full sm:px-0 pl-2 sm:max-w-[688px] text-left font-bold">
           Fala pra gente o que está acontecendo,
           fofoca também é bem vinda
           <Emoji
