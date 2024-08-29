@@ -5,6 +5,8 @@ import { Button } from "../ui/button";
 import { LikeButton } from "./like-button";
 import { Post as PostType } from "@/models/Post";
 import { CommentButton } from "./comment-button";
+import Link from "next/link";
+import { UserAvatar } from "../user-avatar";
 
 interface PostProps {
   post: PostType;
@@ -12,20 +14,22 @@ interface PostProps {
   alreadyHasLikedPost?: boolean;
   comments?: number;
   userIsAuthenticated?: boolean;
+  hiddenAvatar?: boolean;
 }
 
-export function Post({ post, isOwner = false, alreadyHasLikedPost = false, userIsAuthenticated = false, comments }: PostProps) {  
+export function Post({
+  post,
+  isOwner = false,
+  alreadyHasLikedPost = false,
+  userIsAuthenticated = false,
+  comments,
+  hiddenAvatar = false,
+}: PostProps) {  
   return (
     <div
       className="relative flex justify-center items-start w-full max-w-[800px] flex-wrap space-x-6 bg-[#111] p-4 rounded-lg"
     >
-      <Button
-        size="icon"
-        variant="secondary"
-        className="w-16 h-16 rounded-full"
-      >
-        <UserIcon className="w-6 h-6" />
-      </Button>
+      {!hiddenAvatar && <UserAvatar username={post.author.username} /> }
 
       <div className="flex-1 mt-1">
         { isOwner &&
