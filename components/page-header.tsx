@@ -48,7 +48,7 @@ export function PageHeader({
         )}
         size="icon"
         onClick={onBack}
-        className="absolute"
+        className={cn(position !== "inline" && "absolute")}
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>
