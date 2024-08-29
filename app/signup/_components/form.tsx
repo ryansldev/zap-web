@@ -4,6 +4,7 @@ import { signup } from "@/actions/signup"
 import { FormInput } from "@/components/form/form-input"
 import { FormSubmit } from "@/components/form/form-submit"
 import { useAction } from "@/hooks/use-action"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
@@ -90,6 +91,12 @@ export function SignupForm() {
         <FormSubmit>
           Cadastrar
         </FormSubmit>
+
+        <Link href="/login">
+          <span className="text-secondary-foreground underline opacity-80">
+            Já tem uma conta? faça login
+          </span>
+        </Link>
       </div>
     </form>
   )

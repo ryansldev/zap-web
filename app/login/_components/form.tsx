@@ -4,6 +4,7 @@ import { login } from "@/actions/login"
 import { FormInput } from "@/components/form/form-input"
 import { FormSubmit } from "@/components/form/form-submit"
 import { useAction } from "@/hooks/use-action"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
@@ -56,6 +57,12 @@ export function LoginForm() {
         <FormSubmit>
           Login
         </FormSubmit>
+
+        <Link href="/signup">
+          <span className="text-secondary-foreground underline opacity-80">
+            Não tem uma conta? registre-se
+          </span>
+        </Link>
       </div>
     </form>
   )
