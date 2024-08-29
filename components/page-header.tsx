@@ -58,6 +58,7 @@ export function PageHeader({
           <Emoji
             name="brazil"
             alt="Brazil flag"
+            ext="svg"
             height={24}
             width={24}
             className="ml-2"
