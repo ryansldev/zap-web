@@ -61,6 +61,16 @@ export default async function Timeline({ searchParams }: TimelineProps) {
       </div>
       <div className="fixed bottom-0 pb-8 bg-gradient-to-t via-black from-black w-full">
         <div className="max-w-[700px] mx-auto px-4">
+          {userIsAuthenticated && (
+            <Link href={`/users/${username}`}>
+              <Button
+                variant="link"
+                className="text-[#777] hover:text-secondary-foreground underline w-full"
+              >
+                Veja suas publicações
+              </Button>
+            </Link>
+          )}
           <CreatePostForm disabled={!access_token || !username} />
         </div>
       </div>
