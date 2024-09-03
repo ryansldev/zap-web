@@ -34,6 +34,7 @@ export function UserPageHeader({ user }: UserPageHeaderProps) {
               alt="Brazil flag"
               height={24}
               width={24}
+              ext="svg"
               className="ml-2"
             />
           </span>
