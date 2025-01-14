@@ -69,11 +69,11 @@ export function PageHeader({
             {description}
           </span>
         </div>
-      </div>
 
-      { position === "inline" && (
-        <Separator />
-      )}
+        { position === "inline" && (
+          <Separator />
+        )}
+      </div>
     </>
   )
 }
