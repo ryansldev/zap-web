@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import { api } from "@/lib/api";
 import { PageHeader } from "@/components/page-header";
