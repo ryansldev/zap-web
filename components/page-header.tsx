@@ -48,7 +48,7 @@ export function PageHeader({
         )}
         size="icon"
         onClick={onBack}
-        className={cn("absolute h-full top-0 bottom-0", position !== "inline" && "absolute")}
+        className={cn(position === "inline" && centered ? "absolute h-full top-0 bottom-0" : position !== "inline" && "absolute")}
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>
