@@ -1,5 +1,3 @@
-'use client'
-
 import { api } from "@/lib/api";
 import { PageHeader } from "@/components/page-header";
 import { Post } from "@/components/post";
@@ -9,7 +7,6 @@ import { cookies } from "next/headers";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PostPagination } from "@/components/post/post-pagination";
-import { useEffect, useState } from "react";
 
 interface TimelineProps {
   searchParams: {
@@ -17,32 +14,22 @@ interface TimelineProps {
   }
 }
 
-export default function Timeline({ searchParams }: TimelineProps) {
+export default async function Timeline({ searchParams }: TimelineProps) {
   const page = Number(searchParams.page ?? 1)
   
   const username = cookies().get('username')?.value
   const access_token = cookies().get('access_token')?.value
   const userIsAuthenticated = !!username && !!access_token
 
-  const [posts, setPosts] = useState<PostType[]>([])
-
-  useEffect(() => {
-    async function fetch() {
-      const { data } = await api.get<PostType[]>("/posts", {
-        headers: {
-          cookie: `access_token=${access_token}`,
-        },
-        params: {
-          limit: userIsAuthenticated ? 25 : 5,
-          page: userIsAuthenticated ? page : 1,
-        }
-      })
-
-      setPosts(data)
+  const { data: posts } = await api.get<PostType[]>("/posts", {
+    headers: {
+      cookie: `access_token=${access_token}`,
+    },
+    params: {
+      limit: userIsAuthenticated ? 25 : 5,
+      page: userIsAuthenticated ? page : 1,
     }
-
-    fetch()
-  }, [])
+  })
 
   return (
     <div>
@@ -52,7 +39,7 @@ export default function Timeline({ searchParams }: TimelineProps) {
       />
 
       <div className="flex flex-col items-center justify-center space-y-4 pb-[150px] px-4">
-        {posts && posts.map((post) => (
+        {posts && posts.length > 0 && posts.map((post) => (
           <Post
             key={post.id}
             post={post}
