@@ -68,9 +68,10 @@ export function PageHeader({
           {description}
         </span>
       </div>
-
       { position === "inline" && (
-        <Separator />
+        <Separator
+          className="absolute bottom-2 left-0"
+        />
       )}
     </div>
   )
