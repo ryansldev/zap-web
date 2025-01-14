@@ -17,19 +17,26 @@ interface TimelineProps {
 export default async function Timeline({ searchParams }: TimelineProps) {
   const page = Number(searchParams.page ?? 1)
   
-  const username = cookies().get('username')?.value
-  const access_token = cookies().get('access_token')?.value
+  const username = cookies().get('username')?.value || null
+  const access_token = cookies().get('access_token')?.value || null
   const userIsAuthenticated = !!username && !!access_token
 
-  const { data: posts } = await api.get<PostType[]>("/posts", {
-    headers: {
-      cookie: `access_token=${access_token}`,
-    },
-    params: {
-      limit: userIsAuthenticated ? 25 : 5,
-      page: userIsAuthenticated ? page : 1,
-    }
-  })
+  let posts: PostType[] = []
+  try {
+    const { data } = await api.get<PostType[]>("/posts", {
+      headers: {
+        cookie: `access_token=${access_token}`,
+      },
+      params: {
+        limit: userIsAuthenticated ? 25 : 5,
+        page: userIsAuthenticated ? page : 1,
+      }
+    })
+
+    posts = data || [];
+  } catch (error) {
+    console.log("Erro ao buscar posts:", error)
+  }
 
   return (
     <div>
