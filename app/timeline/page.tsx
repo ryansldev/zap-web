@@ -1,3 +1,5 @@
+'use client'
+
 import { api } from "@/lib/api";
 import { PageHeader } from "@/components/page-header";
 import { Post } from "@/components/post";
